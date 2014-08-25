@@ -22,11 +22,11 @@ $(document).ready(function () {
   var html  = "";
   html += "<h1>Todo.ly</h1>";
   html += "<input type='text' id='todo'/><br>";
-  html += "<input type='submit' value='Create Todo' />";
+  html += "<input type='submit' class='button' value='Create Todo'/>";
 
   body.append(html);
 
-  var button = $('button');
+  var button = $('.button');
 
   button.one('click', function (e) {
     e.preventDefault();
@@ -41,9 +41,11 @@ $(document).ready(function () {
   });
 
   button.click(function () {
-    $('h2').prepend("<span>Todo Created</span><br>");
+    $('h2').prepend("<span>Todo Created<br></span>");
     $('span').css("background", "green");
-    $('span').fadeOut(5000)
+    $('span').fadeOut(5000, function () {
+      $(this).remove();
+    })
   });
 
 });
