@@ -19,15 +19,16 @@ $(document).ready(function() {
 
 
   var form = $("<form></form>");
-  form.append('<input type="text" id="todo"/>');
+  form.append('<input type="text" id="todo"/><br>');
+  form.append('<button>Create Todo</button>')
   $('body').append(form);
 
-  var button = document.createElement("input");
-  button.type = "submit";
-  button.value = "Create Todo";
-  document.body.appendChild(button);
 
-
+  $('button').click(function(e){
+    e.preventDefault();
+    var todo = $("#todo").val();
+    $('body').append("<ul><li>" + todo + "</li></ul>")
+  });
 
 });
 
