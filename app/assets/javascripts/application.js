@@ -38,12 +38,13 @@ $(document).ready(function () {
     var todo = $("#todo").val();
     body.append("<ul><li>" + todo + "</li></ul>");
     $('#todo').val("");
+    $('ul').css({"padding": "0"});
   });
 
   button.click(function () {
-    $('h2').prepend("<span>Todo Created<br></span>");
-    $('span').css("background", "green");
-    $('span').fadeOut(5000, function () {
+    $('h2').before("<p>Todo Created</p>");
+    $('p').css({"background": "green", "font-size": "10px", "color": "#FFFFFF", "width": "20%", "margin": "auto"});
+    $('p').fadeOut(5000, function () {
       $(this).remove();
     })
   });
