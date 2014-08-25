@@ -16,12 +16,12 @@
 
 body {
     font-family: Comic Sans MS;
+    margin: auto;
+    width: 70%;
     text-align: center;
 }
 
 li {
-  text-align: left;
   list-style: none;
-  margin-left: 35%;
 ;
 }

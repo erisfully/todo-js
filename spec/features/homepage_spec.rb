@@ -8,6 +8,7 @@ describe "viewing the homepage" do
     fill_in 'todo', with: 'haircut'
     click_on 'Create Todo'
 
+    expect(page).to have_content 'Todo!'
     expect(page).to have_content 'haircut'
   end
 end
