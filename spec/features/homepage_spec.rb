@@ -30,6 +30,7 @@ describe "viewing the homepage" do
     page.find('#closeComplete').click
     expect(page).to have_content 'Completed haircut'
 
-
+    page.find('#deleteCompleted').click
+    expect(page).to_not have_content 'haircut'
   end
 end

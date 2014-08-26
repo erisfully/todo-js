@@ -87,6 +87,7 @@ $(document).ready(function () {
     var todoItem = $(this).parent('.todos');
     $('#delete').remove();
     $('#openComplete').remove();
+    todoItem.append("<p id='deleteCompleted'>&#x2717;</p>");
     $('#complete').append(todoItem);
   });
 
@@ -94,8 +95,8 @@ $(document).ready(function () {
   body.on('click', '#openComplete', function () {
     $('#deleteFlash').remove();
     $('#createFlash').remove();
+    $('#completeFlash').remove();
     $('#complete').before("<div id='completeFlash'>Todo completed<p id='closeComplete'>&#x2717;</p></div>")
-    $('#closeComplete').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "18%"});
     $('#completeFlash').fadeOut(5000, function () {
       $(this).remove();
     })
@@ -105,7 +106,12 @@ $(document).ready(function () {
     $('#completeFlash').remove();
   });
 
-//
-
+// User can delete completed items
+  body.on('click', '#deleteCompleted', function(){
+    var liComplete = $(this).parent('.todos');
+    liComplete.remove();
   });
+
+
+});
 
