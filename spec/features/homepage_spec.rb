@@ -14,5 +14,8 @@ describe "viewing the homepage" do
 
     page.find('#close').click
     expect(page).to_not have_content 'Todo Created'
+
+    page.find('#delete').click
+    expect(page).to_not have_content 'haircut'
   end
 end
