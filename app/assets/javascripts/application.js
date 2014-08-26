@@ -117,7 +117,10 @@ $(document).ready(function () {
 // Undo moves completed items back
   body.on('click', '#undo', function(){
     var completedItem = $(this).parent('.todos');
+    var undobutton = completedItem.children();
+    undobutton.remove();
     $('#todosUl').append(completedItem);
+    completedItem.append("<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p>");
   });
 
 });
