@@ -87,7 +87,7 @@ $(document).ready(function () {
     var todoItem = $(this).parent('.todos');
     $('#delete').remove();
     $('#openComplete').remove();
-    todoItem.append("<p id='deleteCompleted'>&#x2717;</p>");
+    todoItem.append("<p id='deleteCompleted'>&#x2717;</p><p id='undo'>undo</p>");
     $('#complete').append(todoItem);
   });
 
@@ -112,6 +112,13 @@ $(document).ready(function () {
     liComplete.remove();
   });
 
+// Completed section disappears when there are no completed tasks
+
+// Undo moves completed items back
+  body.on('click', '#undo', function(){
+    var completedItem = $(this).parent('.todos');
+    $('#todosUl').append(completedItem);
+  });
 
 });
 

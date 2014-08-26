@@ -72,3 +72,9 @@ li {
     display: inline;
     margin-left: 10px;
 }
+
+#undo {
+    display: inline;
+    font-size: 10px;
+    margin-left: 5px;
+}
