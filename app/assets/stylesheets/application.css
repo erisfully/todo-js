@@ -23,7 +23,6 @@ body {
 
 li {
   list-style: none;
-;
 }
 
 #deleteFlash {
@@ -40,4 +39,16 @@ li {
     color: #FFFFFF;
     width: 20%;
     margin: auto;
+}
+
+#delete {
+    color: #ff0000;
+    display: inline;
+    margin-left: 20px;
+}
+
+#openComplete {
+    color: #008000;
+    display: inline;
+    margin-left: 5px;
 }

@@ -22,5 +22,12 @@ describe "viewing the homepage" do
     page.find('#closeDelete').click
     expect(page).to_not have_content 'Todo deleted'
 
+    fill_in 'todo', with: 'haircut'
+    click_on 'Create Todo'
+
+    page.find('#openComplete').click
+    expect(page).to have_content 'Completed haircut'
+
+
   end
 end
