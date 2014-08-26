@@ -42,13 +42,18 @@ $(document).ready(function () {
   });
 
   button.click(function () {
-    $('h2').before("<div>Todo Created<p>X</p></div>");
+    $('h2').before("<div>Todo Created<p id='close'>X</p></div>");
     $('div').css({"background": "green", "font-size": "10px", "color": "#FFFFFF", "width": "20%", "margin": "auto"});
     $('p').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
-    $('div').fadeOut(5000, function () {
-      $(this).remove();
-    })
+//    $('div').fadeOut(5000, function () {
+//      $(this).remove();
+//    })
   });
+
+  body.on('click', '#close', function() {
+    $('div').remove();
+  });
+
 
 });
 
