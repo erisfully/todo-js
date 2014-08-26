@@ -15,7 +15,7 @@
  */
 
 body {
-    font-family: Comic Sans MS;
+    font-family: Comic Sans MS, sans-serif;
     margin: auto;
     width: 70%;
     text-align: center;
@@ -26,6 +26,18 @@ li {
 ;
 }
 
-span {
+#deleteFlash {
+    background: #ff0000;
+    font-size: 10px;
+    color: #FFFFFF;
+    width: 20%;
+    margin: auto;
+}
 
+#createFlash {
+    background: #008000;
+    font-size: 10px;
+    color: #FFFFFF;
+    width: 20%;
+    margin: auto;
 }

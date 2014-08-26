@@ -41,24 +41,42 @@ $(document).ready(function () {
     $('ul').css({"padding": "0"});
   });
 
-  button.click(function () {
-    $('h2').before("<div>Todo Created<p id='close'>X</p></div>");
-    $('div').css({"background": "green", "font-size": "10px", "color": "#FFFFFF", "width": "20%", "margin": "auto"});
-    $('p').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
-    $('div').fadeOut(5000, function () {
-      $(this).remove();
-    })
-  });
-
-  body.on('click', '#close', function() {
-    $('div').remove();
-  });
-
-
   body.on('click', '#delete', function() {
     var li = $(this).parent('.todos');
     li.remove();
   });
+
+  button.click(function () {
+    $('#createFlash').remove();
+    $('#deleteFlash').remove();
+    $('h2').before("<div id='createFlash'>Todo Created<p id='closeCreate'>X</p></div>");
+    $('p').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
+    $('#createFlash').fadeOut(5000, function () {
+      $(this).remove();
+    })
+  });
+
+  body.on('click', '#closeCreate', function() {
+    $('#createFlash').remove();
+  });
+
+  body.on('click', '#delete', function () {
+    $('#deleteFlash').remove();
+    $('#createFlash').remove();
+    $('h2').before("<div id='deleteFlash'>Todo deleted<p id='closeDelete'>X</p></div>");
+    $('p').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
+    $('#deleteFlash').fadeOut(5000, function () {
+      $(this).remove();
+    })
+  });
+
+  body.on('click', '#closeDelete', function() {
+    $('#deleteFlash').remove();
+  });
+
+
+
+
 
 });
 

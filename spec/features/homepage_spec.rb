@@ -12,10 +12,15 @@ describe "viewing the homepage" do
     expect(page).to have_content 'haircut'
     expect(page).to have_content 'Todo Created'
 
-    page.find('#close').click
+    page.find('#closeCreate').click
     expect(page).to_not have_content 'Todo Created'
 
     page.find('#delete').click
     expect(page).to_not have_content 'haircut'
+    expect(page).to have_content 'Todo deleted'
+
+    page.find('#closeDelete').click
+    expect(page).to_not have_content 'Todo deleted'
+
   end
 end
