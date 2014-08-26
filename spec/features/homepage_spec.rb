@@ -26,6 +26,8 @@ describe "viewing the homepage" do
     click_on 'Create Todo'
 
     page.find('#openComplete').click
+    expect(page).to have_content 'Todo completed'
+    page.find('#closeComplete').click
     expect(page).to have_content 'Completed haircut'
 
 

@@ -16,8 +16,8 @@
 
 $(document).ready(function () {
 
+// Create form
   var body = $('body');
-
 
   var html = "";
   html += "<h1>Todo.ly</h1>";
@@ -26,6 +26,7 @@ $(document).ready(function () {
 
   body.append(html);
 
+// Create list and list items
   var button = $('.button');
 
   button.one('click', function (e) {
@@ -41,11 +42,13 @@ $(document).ready(function () {
     $('ul').css({"padding": "0"});
   });
 
+// Delete list items
   body.on('click', '#delete', function () {
     var li = $(this).parent('.todos');
     li.remove();
   });
 
+// Flash message for creating
   button.click(function () {
     $('#createFlash').remove();
     $('#deleteFlash').remove();
@@ -60,6 +63,7 @@ $(document).ready(function () {
     $('#createFlash').remove();
   });
 
+// Flash message for deleting
   body.on('click', '#delete', function () {
     $('#deleteFlash').remove();
     $('#createFlash').remove();
@@ -74,7 +78,7 @@ $(document).ready(function () {
     $('#deleteFlash').remove();
   });
 
-
+// Complete tasks and add to completed list
   body.one('click', '#openComplete', function () {
     $('#todosUl').after("<h2>Completed</h2><ul id='complete'></ul>");
   });
@@ -86,5 +90,22 @@ $(document).ready(function () {
     $('#complete').append(todoItem);
   });
 
-});
+// Flash message for completed task
+  body.on('click', '#openComplete', function () {
+    $('#deleteFlash').remove();
+    $('#createFlash').remove();
+    $('#complete').before("<div id='completeFlash'>Todo completed<p id='closeComplete'>&#x2717;</p></div>")
+    $('#closeComplete').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "18%"});
+    $('#completeFlash').fadeOut(5000, function () {
+      $(this).remove();
+    })
+  });
+
+  body.on('click', '#closeComplete', function () {
+    $('#completeFlash').remove();
+  });
+
+//
+
+  });
 
