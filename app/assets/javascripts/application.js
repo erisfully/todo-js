@@ -16,6 +16,25 @@
 
 $(document).ready(function () {
 
+  var $todo = $('todo');
+
+//Get todos data as JSON
+$('button').on('click', function() {
+
+  var todo = {
+    todos: $todo.val()
+  };
+
+  $.ajax({
+    type: 'POST',
+    url: '/todos',
+    data: todo,
+    success: function(newTodo) {
+      $('#todosUl').append("<li class='todos'>" + todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+    }
+  })
+});
+
 // Create form
   var body = $('body');
 
