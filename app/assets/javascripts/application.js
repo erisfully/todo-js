@@ -52,6 +52,7 @@ $(document).ready(function () {
   button.click(function () {
     $('#createFlash').remove();
     $('#deleteFlash').remove();
+    $('#completeFlash').remove();
     $('#todosUl').before("<div id='createFlash'>Todo Created<p id='closeCreate'>&#x2717;</p></div>");
     $('#closeCreate').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
     $('#createFlash').fadeOut(5000, function () {
@@ -67,6 +68,7 @@ $(document).ready(function () {
   body.on('click', '#delete', function () {
     $('#deleteFlash').remove();
     $('#createFlash').remove();
+    $('#completeFlash').remove();
     $('#todosUl').before("<div id='deleteFlash'>Todo deleted<p id='closeDelete'>&#x2717;</p></div>");
     $('#closeDelete').css({"color": "black", "display": "inline", "margin-right": "-31%", "margin-left": "24%"});
     $('#deleteFlash').fadeOut(5000, function () {
@@ -115,6 +117,7 @@ $(document).ready(function () {
 
 // Undo moves completed items back
   body.on('click', '#undo', function(){
+    $('#completeFlash').remove();
     var completedItem = $(this).parent('.todos');
     var undobutton = completedItem.children();
     undobutton.remove();
@@ -127,5 +130,10 @@ $(document).ready(function () {
   if($('#complete').has('li').length === 0) {
     $('#completeHeader').hide();
   }});
+
+  body.on('click', '#deleteCompleted', function() {
+    if($('#complete').has('li').length === 0) {
+      $('#completeHeader').hide();
+    }});
 });
 
