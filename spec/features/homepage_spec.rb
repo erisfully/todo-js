@@ -38,5 +38,7 @@ describe "viewing the homepage" do
     page.find('#openComplete').click
     page.find('#undo').click
     expect(page).to have_content 'Todo! haircut'
+    expect(page).to_not have_content 'Completed'
+
   end
 end
