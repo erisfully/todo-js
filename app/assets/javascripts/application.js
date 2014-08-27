@@ -80,10 +80,11 @@ $(document).ready(function () {
 
 // Complete tasks and add to completed list
   body.one('click', '#openComplete', function () {
-    $('#todosUl').after("<h2>Completed</h2><ul id='complete'></ul>");
+    $('#todosUl').after("<h2 id='completeHeader'>Completed</h2><ul id='complete'></ul>");
   });
 
   body.on('click', '#openComplete', function () {
+    $('#completeHeader').show();
     var todoItem = $(this).parent('.todos');
     $('#delete').remove();
     $('#openComplete').remove();
@@ -112,8 +113,6 @@ $(document).ready(function () {
     liComplete.remove();
   });
 
-// Completed section disappears when there are no completed tasks
-
 // Undo moves completed items back
   body.on('click', '#undo', function(){
     var completedItem = $(this).parent('.todos');
@@ -123,5 +122,10 @@ $(document).ready(function () {
     completedItem.append("<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p>");
   });
 
+// Completed section disappears when there are no completed tasks
+  body.on('click', '#undo', function() {
+  if($('#complete').has('li').length === 0) {
+    $('#completeHeader').hide();
+  }});
 });
 
