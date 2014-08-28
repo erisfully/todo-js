@@ -32,6 +32,7 @@ $(document).ready(function () {
 
   previousTodos.success(function() {
     var listitems = previousTodos.responseJSON;
+    $('#todosUl').remove();
     if (listitems.length > 0) {
       body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
     }
@@ -60,6 +61,7 @@ $(document).ready(function () {
 
     previousTodos.success(function() {
       var listitems = previousTodos.responseJSON;
+      $('#todosUl').remove();
       if (listitems.length > 0) {
         body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
       }
