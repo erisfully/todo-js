@@ -16,8 +16,6 @@
 
 $(document).ready(function () {
 
-  var $todo = $('todo');
-
 // Create form
   var body = $('body');
 
@@ -28,15 +26,26 @@ $(document).ready(function () {
 
   body.append(html);
 
+
+//Todos from database are visible
+  var previousTodos = $.getJSON('/todos');
+
+  previousTodos.success(function() {
+    var listitems = previousTodos.responseJSON;
+    if (listitems.length > 0) {
+      body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
+    }
+    $.each(listitems, function () {
+      $('#todosUl').append("<li class='todos' data-todo-id='"+ this.id +"'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+    });
+  });
+
 // Create list and list items
   var button = $('.button');
 
   button.one('click', function (e) {
     e.preventDefault();
-    body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
   });
-
-
 
   button.click(function (e) {
     e.preventDefault();
@@ -47,33 +56,31 @@ $(document).ready(function () {
       url: '/todos',
       data: { todo: { todo: todo }}
     });
+    var previousTodos = $.getJSON('/todos');
 
-    $('#todosUl').append("<li class='todos'>" + todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+    previousTodos.success(function() {
+      var listitems = previousTodos.responseJSON;
+      if (listitems.length > 0) {
+        body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
+      }
+      $.each(listitems, function () {
+        $('#todosUl').append("<li class='todos' data-todo-id='"+ this.id +"'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+      });
+    });
     $('#todo').val("");
     $('ul').css({"padding": "0"});
   });
-  
-//Todos from database are visible
-  var previousTodos = $.getJSON('/todos');
 
-  previousTodos.success(function() {
-    var listitems = previousTodos.responseJSON;
-    if (listitems.length > 0) {
-      body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
-    }
-    $.each(listitems, function () {
-      $('#todosUl').append("<li class='todos'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
-    });
-  });
 
 
 // Delete list items
   body.on('click', '#delete', function () {
+    var el = document.querySelector('.todos');
 
     $.ajax({
-      type: 'DELETE',
-      url: '/todos/:id',
-      data: { todo: { todo: todo }}
+      type: 'POST',
+      url: '/todos/' + el.dataset.todoId,
+      data: { "_method": "delete"}
     });
 
     var li = $(this).parent('.todos');
