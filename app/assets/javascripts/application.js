@@ -152,10 +152,9 @@ $(document).ready(function () {
   var allCompleted = $.getJSON('/completed');
   allCompleted.success(function () {
     var completedItems = allCompleted.responseJSON;
-    debugger;
     $('#completeHeader').remove();
     if (completedItems.length > 0) {
-    $('#todosUl').after("<h2 id='completeHeader'>Completed</h2><ul id='complete'></ul>");
+    $('body').append("<h2 id='completeHeader'>Completed</h2><ul id='complete'></ul>");
     }
     $.each(completedItems, function(){
       $('#complete').append("<li class='todos' data-todo-id='" + this.id + "'>" + this.todo + "<p id='deleteCompleted'>&#x2717;</p><p id='undo'>undo</p>")
