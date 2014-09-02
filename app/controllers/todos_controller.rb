@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
 
   def index
-    todos = Todo.all
+    todos = Todo.where(completed: false)
     render json: todos
   end
 
@@ -15,4 +15,12 @@ class TodosController < ApplicationController
     todo.destroy
     render json: todo
   end
+
+  def update
+    todo = Todo.find(params['id'])
+    todo.update(completed: true)
+    render json: todo
+  end
+
+
 end

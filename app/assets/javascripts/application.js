@@ -30,7 +30,7 @@ $(document).ready(function () {
 //Todos from database are visible
   var previousTodos = $.getJSON('/todos');
 
-  previousTodos.success(function() {
+  previousTodos.success(function () {
     var listitems = previousTodos.responseJSON;
     $('#todosUl').remove();
     $('#todoHeader').remove();
@@ -38,9 +38,10 @@ $(document).ready(function () {
       body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
     }
     $.each(listitems, function () {
-      $('#todosUl').append("<li class='todos' data-todo-id='"+ this.id +"'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+      $('#todosUl').append("<li class='todos' data-todo-id='" + this.id + "'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
     });
   });
+
 
 // Create list and list items
   var button = $('.button');
@@ -60,7 +61,7 @@ $(document).ready(function () {
     });
     var previousTodos = $.getJSON('/todos');
 
-    previousTodos.success(function() {
+    previousTodos.success(function () {
       var listitems = previousTodos.responseJSON;
       $('#todosUl').remove();
       $('#todoHeader').remove();
@@ -68,13 +69,12 @@ $(document).ready(function () {
         body.append("<h2 id='todoHeader'>Todo!</h2><ul id='todosUl'></ul>");
       }
       $.each(listitems, function () {
-        $('#todosUl').append("<li class='todos' data-todo-id='"+ this.id +"'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
+        $('#todosUl').append("<li class='todos' data-todo-id='" + this.id + "'>" + this.todo + "<p id='delete'>&#x2717;</p><p id='openComplete'>&#10003;</p></li>");
       });
     });
     $('#todo').val("");
     $('ul').css({"padding": "0"});
   });
-
 
 
 // Delete list items
@@ -127,14 +127,39 @@ $(document).ready(function () {
   body.one('click', '#openComplete', function () {
     $('#todosUl').after("<h2 id='completeHeader'>Completed</h2><ul id='complete'></ul>");
   });
+  body.on('click', '#openComplete', function () {
+
+    var el = document.querySelector('.todos');
+
+    $.ajax({
+      type: 'POST',
+      url: '/todos/' + el.dataset.todoId,
+      data: { "_method": "patch"}
+    });
+  });
+
 
   body.on('click', '#openComplete', function () {
     $('#completeHeader').show();
     var todoItem = $(this).parent('.todos');
     $('#delete').remove();
     $('#openComplete').remove();
-    todoItem.append("<p id='deleteCompleted'>&#x2717;</p><p id='undo'>undo</p>");
+    todoItem.append("");
     $('#complete').append(todoItem);
+  });
+
+//Completed todos are visible on reload
+  var allCompleted = $.getJSON('/completed');
+  allCompleted.success(function () {
+    var completedItems = allCompleted.responseJSON;
+    debugger;
+    $('#completeHeader').remove();
+    if (completedItems.length > 0) {
+    $('#todosUl').after("<h2 id='completeHeader'>Completed</h2><ul id='complete'></ul>");
+    }
+    $.each(completedItems, function(){
+      $('#complete').append("<li class='todos' data-todo-id='" + this.id + "'>" + this.todo + "<p id='deleteCompleted'>&#x2717;</p><p id='undo'>undo</p>")
+    })
   });
 
 // Flash message for completed task
@@ -153,13 +178,13 @@ $(document).ready(function () {
   });
 
 // User can delete completed items
-  body.on('click', '#deleteCompleted', function(){
+  body.on('click', '#deleteCompleted', function () {
     var liComplete = $(this).parent('.todos');
     liComplete.remove();
   });
 
 // Undo moves completed items back
-  body.on('click', '#undo', function(){
+  body.on('click', '#undo', function () {
     $('#completeFlash').remove();
     var completedItem = $(this).parent('.todos');
     var undobutton = completedItem.children();
@@ -169,14 +194,16 @@ $(document).ready(function () {
   });
 
 // Completed section disappears when there are no completed tasks
-  body.on('click', '#undo', function() {
-  if($('#complete').has('li').length === 0) {
-    $('#completeHeader').hide();
-  }});
-
-  body.on('click', '#deleteCompleted', function() {
-    if($('#complete').has('li').length === 0) {
+  body.on('click', '#undo', function () {
+    if ($('#complete').has('li').length === 0) {
       $('#completeHeader').hide();
-    }});
+    }
+  });
+
+  body.on('click', '#deleteCompleted', function () {
+    if ($('#complete').has('li').length === 0) {
+      $('#completeHeader').hide();
+    }
+  });
 });
 

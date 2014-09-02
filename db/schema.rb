@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140902202134) do
 
   create_table "todos", force: true do |t|
     t.string  "todo"
-    t.boolean "completed"
+    t.boolean "completed", default: false
   end
 
 end
